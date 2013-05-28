@@ -888,19 +888,19 @@ class Compiler {
                     $this->prettyprint = false;
 
                     if ($key == 'class') {
-                        $value = $this->createCode('echo (is_array(%1$s)) ? implode(" ", %1$s) : %1$s', $value);
+                        $value = $this->createCode('echo is_array(%1$s) ? implode(" ", %1$s) : %1$s', $value);
                     }
                     elseif (strpos($key, 'data-') !== false) {
-                        $value = $this->createCode('echo json_encode(%s)', $value);
+                        $value = $this->createCode('echo is_array(%1$s) ? json_encode(%1$s) : %1$s', $value);
                     }else{
-                        $value = $this->createCode('echo %s', $value);
+                        $value = $this->createCode('echo %1$s', $value);
                     }
 
                     $this->prettyprint = $pp;
                 }
             }
             if ($key == 'class') {
-                if($value !== 'false' && $value !== 'null' && $value !== 'undefined')
+                if($value !== 'false' && $value !== 'null' && $value !== 'undefined' && $value !== '')
                     array_push($classes, $value);
             }
             elseif ($value == 'true' || $attr['value'] === true) {

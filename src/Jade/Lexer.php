@@ -359,7 +359,7 @@ class Lexer {
     }
 
     protected function scanEach() {
-        if ( preg_match('/^(?:- *)?(?:each|for) +(\w+)(?: *, *(\w+))? +in *([^\n]+)/', $this->input, $matches) ) {
+        if ( preg_match('/^(?:- *)?(?:each|for) +([a-zA-Z_$][\w$]*)(?: *, *([a-zA-Z_$][\w$]*))? +in *([^\n]+)/', $this->input, $matches) ) {
 
             $this->consume($matches[0]);
 
@@ -372,7 +372,7 @@ class Lexer {
     }
 
     protected function scanCode() {
-        if ( preg_match('/^(!?=|-)([^\n]+)/', $this->input, $matches) ) {
+        if ( preg_match('/^(!?=|-)[ \t]*([^\n]+)/', $this->input, $matches) ) {
 
             $this->consume($matches[0]);
             $flags  = $matches[1];

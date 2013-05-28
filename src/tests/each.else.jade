@@ -16,3 +16,19 @@ if users
       li= user
     else
       li no users!
+
+user = array()
+
+ul
+  - each val, key in user
+    li #{key}: #{val}
+  - else
+    li user has no details!
+
+- user[name] = 'tobi'
+
+ul
+  each val, key in user
+    li #{key}: #{val}
+  else
+    li user has no details!
