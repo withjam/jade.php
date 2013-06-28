@@ -877,9 +877,9 @@ class Compiler {
                 if ($json !== null && is_array($json) && $key == 'class') {
                     $value = implode(' ', $json);
                 }
-                elseif ($key == "checked") {
-                    // boolean checked handling
-                    $items[] = $this->createCode(' if (%1$s) { echo "checked=\'checked\'"; }', $value);
+                elseif (in_array($key, array("checked", "selected", "readonly", "disabled"))) {
+                    // boolean handling
+                    $items[] = $this->createCode(" if (%1\$s) { echo \"$key='$key'\"; }", $value);
                     continue;
                 }
                 else{
